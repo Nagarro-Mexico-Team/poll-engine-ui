@@ -1,0 +1,13 @@
+<div class="row">
+	<div class="col-12">
+		<div class="container">
+			<p>content works!</p>
+			<div class="row" *ngIf="!isLoggedIn">
+				<app-login></app-login>
+			</div>
+			<div class="row" *ngIf="isLoggedIn">
+				<app-dashboard></app-dashboard>
+			</div>
+		</div>
+	</div>
+</div>
