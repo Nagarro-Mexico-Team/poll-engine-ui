@@ -13,4 +13,8 @@ export class ContentComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
+	doOnLoginSuccess($event) {
+		console.log(["loginSuccess", $event]);
+		this.isLoggedIn = $event;
+	}
 }
