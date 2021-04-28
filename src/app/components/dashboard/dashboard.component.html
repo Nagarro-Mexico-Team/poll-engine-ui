@@ -1,3 +1,10 @@
-<h1>Welcome!</h1>
+<h1>Welcome {{ username }}</h1>
 
-<p>dashboard works!</p>
+<h3><a href="#" (click)="getRecentChanges()">recent changes</a></h3>
+
+
+<div class="table" *ngIf="recentChanges.length>0">
+	<table mat-table [dataSource]="recentChanges">
+  
+	</table>
+</div>

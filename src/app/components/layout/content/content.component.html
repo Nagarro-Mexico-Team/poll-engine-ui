@@ -1,14 +1,16 @@
 <div class="row">
 	<div class="col-12">
 		<div class="container">
-			<p>content works!</p>
+			
 			<div class="row" *ngIf="!isLoggedIn">
 				<div style="margin: auto;">
 					<app-login (onLoginSuccess)="doOnLoginSuccess($event)"></app-login>
 				</div>
 			</div>
 			<div class="row" *ngIf="isLoggedIn">
-				<app-dashboard></app-dashboard>
+				<app-dashboard [username]="username">
+					
+				</app-dashboard>
 			</div>
 		</div>
 	</div>

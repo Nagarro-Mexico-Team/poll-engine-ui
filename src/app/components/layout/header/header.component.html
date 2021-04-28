@@ -2,24 +2,19 @@
 	<div class="col-12">
 		<mat-toolbar>
 			<mat-toolbar-row>
-				<button mat-icon-button class="example-icon">
+				<button mat-icon-button>
 					<mat-icon >menu</mat-icon>
 				</button>
-				<h1>SimpleCRM</h1>
+				<h1>Poll Engine</h1>
 				<span class="menu-spacer"></span>
 				<div>
-					<a mat-button [routerLink]="'/accounts'"> Accounts </a>
-					<a mat-button [routerLink]="'/create-account'"> Create Account </a>
-					<a mat-button [routerLink]="'/contacts'"> Contacts </a>
-					<a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
+					<a mat-button [routerLink]="'/polls'"> Polls </a>
+					<a mat-button [routerLink]="'/create-poll'"> Create poll </a>
+					<a mat-button [routerLink]="'/poll'"> Respond to poll </a>
+					<a mat-button [routerLink]="'/users'"> Create User </a>
 					<a mat-button [routerLink]="'/activities'"> Activities </a>
-					<a mat-button [routerLink]="'/create-activity'"> Create Activity </a>
-
+					<a mat-button href="#" (click)="logout()">Logout</a>
 				</div>
-			</mat-toolbar-row>
-
-			<mat-toolbar-row>
-				<span style="font-size: 12px;">SimpleCRM helps you easily manage your contacts</span>
 			</mat-toolbar-row>
 		</mat-toolbar>
 	</div>

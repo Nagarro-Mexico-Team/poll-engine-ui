@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'poll-engine-ui';
+  isLoggedIn: boolean = false;
+
+  doLogin($event) {
+  	console.log($event);
+  	this.isLoggedIn = true;
+  }
+
+  doLogout(event): void {
+  	console.log(event);
+  	this.isLoggedIn = false;
+  }
+
 }

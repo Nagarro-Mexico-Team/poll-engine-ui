@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
 	selector: 'app-content',
@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-	isLoggedIn: boolean = false;
+	@Input() isLoggedIn: boolean;
+	@Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
+	username: string;
 
 	constructor() { }
 
@@ -15,6 +17,8 @@ export class ContentComponent implements OnInit {
 
 	doOnLoginSuccess($event) {
 		console.log(["loginSuccess", $event]);
-		this.isLoggedIn = $event;
+		this.username = $event.username;
+		this.isLoggedIn = $event.isLoggedIn;
+		this.onLogin.emit(true);
 	}
 }

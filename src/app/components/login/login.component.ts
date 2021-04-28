@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { UserSession } from '../../models/user-session';
+
 
 @Component({
 	selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
 	username: string = '';
 	password: string = '';
 
-	@Output() onLoginSuccess = new EventEmitter<boolean>();
+	@Output() onLoginSuccess = new EventEmitter<UserSession>();
 
 	constructor() { }
 
@@ -23,7 +25,11 @@ export class LoginComponent implements OnInit {
 		console.log('doLogin');
 		if (this.username == "admin" && this.password == "123") {
 			console.log('authenticated!');
-			this.onLoginSuccess.emit(true);
+			let userSession: UserSession = new UserSession();
+			userSession.username = this.username;
+			userSession.password = this.password;
+			userSession.isLoggedIn = true;
+			this.onLoginSuccess.emit(userSession);
 		} else {
 			console.log('error!');
 			this.isNotValid = true;
