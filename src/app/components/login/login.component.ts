@@ -10,8 +10,8 @@ import { UserSession } from '../../models/user-session';
 export class LoginComponent implements OnInit {
 	isNotValid: boolean = false;
 	errorMessage: string = '';
-	username: string = '';
-	password: string = '';
+	username: string = 'admin';
+	password: string = '123';
 
 	@Output() onLoginSuccess = new EventEmitter<UserSession>();
 

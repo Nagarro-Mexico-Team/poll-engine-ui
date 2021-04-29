@@ -3,8 +3,37 @@
 <h3><a href="#" (click)="getRecentChanges()">recent changes</a></h3>
 
 
-<div class="table" *ngIf="recentChanges.length>0">
-	<table mat-table [dataSource]="recentChanges">
-  
-	</table>
+<div class="table" *ngIf="recentChanges.length > 0">
+	<h2>Welcome to the dashboard</h2>
+	<div class="mat-elevation-z5">
+		<table class="table table-responsive table-striped table-bordered table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th> Activity Id </th>
+					<th> Activity Name / Description </th>
+					<th> Date/Time </th>
+					<th> Reference Id </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of recentChanges">
+					<td> {{item.id}} </td>
+					<td> {{item.activity_module}} </td>
+					<td> {{item.datetime}} </td>
+					<td> {{item.reference_id}} </td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr class="thead-dark">
+					<th> No. of records {{ recentChanges.length }}</th>
+					<th> </th>
+					<th> </th>
+					<th> </th>
+					
+				</tr>
+			</tfoot>
+		</table>
+
+	</div>
+
 </div>

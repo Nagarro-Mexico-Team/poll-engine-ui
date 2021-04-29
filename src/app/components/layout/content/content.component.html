@@ -3,14 +3,19 @@
 		<div class="container">
 			
 			<div class="row" *ngIf="!isLoggedIn">
-				<div style="margin: auto;">
+				<div style="margin: auto; margin-top: 150px; ">
 					<app-login (onLoginSuccess)="doOnLoginSuccess($event)"></app-login>
 				</div>
 			</div>
 			<div class="row" *ngIf="isLoggedIn">
-				<app-dashboard [username]="username">
-					
-				</app-dashboard>
+				<div class="col-12">
+					<app-dashboard [username]="username">
+						
+					</app-dashboard>
+				</div>
+				<div class="col-12">
+					<app-polls-list></app-polls-list>
+				</div>
 			</div>
 		</div>
 	</div>
