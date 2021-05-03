@@ -1,0 +1,16 @@
+.my-form-control-id {
+	color: #495057;
+	display: block;
+	height: calc(1.5em + 0.75rem + 2px);
+    background-clip: padding-box;
+    background-color: #ddd;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    color: #495057;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 0.375rem 0.75rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 20%;
+ }

@@ -1,0 +1,23 @@
+<table class="table table-striped table-hover table-bordered">
+	<thead class="thead-dark">
+		<tr>
+			<th *ngFor="let col of columnNames">{{col}}</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let row of gridData.rows">
+			<td *ngFor="let field of gridData.fieldNames">{{row[field]}}</td>
+			<td>
+				<a href="#" class="btn btn-sm btn-primary">Edit</a>
+				<a href="#" class="btn btn-sm btn-danger">Delete</a>
+				<a href="#" class="btn btn-sm btn-secondary">View</a>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr class="thead-dark" >
+			<th [colspan]="gridData.rows.length+1">Total of rows: {{ gridData.rows.length }}</th>
+		</tr>	
+	</tfoot>
+</table>

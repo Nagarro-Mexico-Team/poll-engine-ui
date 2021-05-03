@@ -18,8 +18,6 @@ export class DashboardComponent implements OnInit {
 	displayedColumns: string[] = ['id', 'activity_module', 'datetime', 'reference_id'];
 	@Input() username: string;
 
-	
-
 	constructor(private recentChangesService: RecentChangesService) {
 		this.recentChanges = [];
 	}

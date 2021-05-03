@@ -16,6 +16,13 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { StubMatRowDefDirective } from './helpers/stub-mat-row-def.directive';
 import { StubMatHeaderRowDefDirective } from './helpers/stub-mat-header-row-def.directive';
 import { PollsListComponent } from './components/polls/polls-list/polls-list.component';
+import { PollFormComponent } from './components/polls/poll-form/poll-form.component';
+import { PollCreateComponent } from './components/polls/poll-create/poll-create.component';
+import { PollUpdateComponent } from './components/polls/poll-update/poll-update.component';
+import { PollViewComponent } from './components/polls/poll-view/poll-view.component';
+import { PollRespondComponent } from './components/polls/poll-respond/poll-respond.component';
+import { BasicGridComponent } from './components/commons/grids/basic-grid/basic-grid.component';
+import { GridQuestionOptionsComponent } from './components/polls/grid-question-options/grid-question-options.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,14 @@ import { PollsListComponent } from './components/polls/polls-list/polls-list.com
     DashboardComponent,
     StubMatRowDefDirective,
     StubMatHeaderRowDefDirective,
-    PollsListComponent
+    PollsListComponent,
+    PollFormComponent,
+    PollCreateComponent,
+    PollUpdateComponent,
+    PollViewComponent,
+    PollRespondComponent,
+    BasicGridComponent,
+    GridQuestionOptionsComponent
   ],
   imports: [
     BrowserModule,

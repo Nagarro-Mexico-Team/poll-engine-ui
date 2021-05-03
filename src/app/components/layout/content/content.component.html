@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-12">
-		<div class="container">
+		<div class="container-fluid">
 			
 			<div class="row" *ngIf="!isLoggedIn">
 				<div style="margin: auto; margin-top: 150px; ">
@@ -9,13 +9,9 @@
 			</div>
 			<div class="row" *ngIf="isLoggedIn">
 				<div class="col-12">
-					<app-dashboard [username]="username">
-						
-					</app-dashboard>
+					<router-outlet></router-outlet>
 				</div>
-				<div class="col-12">
-					<app-polls-list></app-polls-list>
-				</div>
+				
 			</div>
 		</div>
 	</div>
