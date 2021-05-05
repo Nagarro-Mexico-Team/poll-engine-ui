@@ -4,6 +4,7 @@ import { PollsListComponent } from './components/polls/polls-list/polls-list.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PollCreateComponent } from './components/polls/poll-create/poll-create.component';
 import { PollRespondComponent } from './components/polls/poll-respond/poll-respond.component';
+import { AddQuestionComponent } from './components/polls/add-question/add-question.component';
 
 const routes: Routes = [
 	{path:'', pathMatch: 'full', redirectTo: 'dashboard'},
@@ -11,6 +12,7 @@ const routes: Routes = [
 	{path: 'dashboard', component: DashboardComponent }, 
 	{path: 'create-poll', component: PollCreateComponent }, 
 	{path: 'respond-poll', component: PollRespondComponent }, 
+	{path: 'add-question', component: AddQuestionComponent }, 
 ];
 
 @NgModule({
