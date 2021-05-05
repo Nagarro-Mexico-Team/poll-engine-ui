@@ -8,11 +8,22 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BasicGridComponent implements OnInit {
 	@Input() columnNames : string[] = [];
 	@Input() gridData: GridData;
+	@Input() includeControlButtons: boolean = false;
 
 	constructor() { }
 
 	ngOnInit(): void {
 		console.log(["BasicGridComponent::onInit",this.gridData, this.columnNames]);
+	}
+
+	get numOfColumns(): number {
+		let num: number = 0;
+		try {
+			num = this.columnNames.length + ((this.includeControlButtons == true) ? 1:0);
+		} catch (e) {
+			console.log(["BasicGridComponent::numOfColumns", e])
+		}
+		return num;
 	}
 
 }

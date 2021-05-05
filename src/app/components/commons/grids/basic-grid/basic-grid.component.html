@@ -2,13 +2,13 @@
 	<thead class="thead-dark">
 		<tr>
 			<th *ngFor="let col of columnNames">{{col}}</th>
-			<th>Actions</th>
+			<th *ngIf="includeControlButtons">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let row of gridData.rows">
 			<td *ngFor="let field of gridData.fieldNames">{{row[field]}}</td>
-			<td>
+			<td *ngIf="includeControlButtons" >
 				<a href="#" class="btn btn-sm btn-primary">Edit</a>
 				<a href="#" class="btn btn-sm btn-danger">Delete</a>
 				<a href="#" class="btn btn-sm btn-secondary">View</a>
@@ -17,7 +17,7 @@
 	</tbody>
 	<tfoot>
 		<tr class="thead-dark" >
-			<th [colspan]="gridData.rows.length+1">Total of rows: {{ gridData.rows.length }}</th>
+			<th [attr.colspan]="numOfColumns">Total of rows: {{ gridData.rows.length }}</th>
 		</tr>	
 	</tfoot>
 </table>
