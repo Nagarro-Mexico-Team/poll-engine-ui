@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Poll } from '../../../models/poll';
 import { GridData } from '../../commons/grids/basic-grid/basic-grid.component';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { QuestionFormComponent } from './question-form/question-form.component';
+
 
 @Component({
 	selector: 'app-poll-form',
@@ -12,7 +15,7 @@ export class PollFormComponent implements OnInit {
 	@Input() poll: Poll;
 	gridData: GridData;
 
-	constructor() {
+	constructor(public dialog: MatDialog) {
 		
 	}
 
@@ -33,6 +36,13 @@ export class PollFormComponent implements OnInit {
 		});
 		this.gridData.fieldNames = ["questionNumber","questionText",
 				"questionValue","questionAnswer","questionHint"]
+	}
+
+	addQuestion() {
+		let dialogRef = this.dialog.open(QuestionFormComponent, {
+		  height: '650px',
+		  width: '850px',
+		});
 	}
 
 }

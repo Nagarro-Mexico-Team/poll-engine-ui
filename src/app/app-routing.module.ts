@@ -6,11 +6,10 @@ import { PollCreateComponent } from './components/polls/poll-create/poll-create.
 import { PollRespondComponent } from './components/polls/poll-respond/poll-respond.component';
 
 const routes: Routes = [
-	{path:'', pathMatch: 'full', redirectTo: 'dashboard'},
 	{path: 'polls', component: PollsListComponent }, 
 	{path: 'dashboard', component: DashboardComponent }, 
 	{path: 'create-poll', component: PollCreateComponent }, 
-	{path: 'respond-poll', component: PollRespondComponent }, 
+	{path: 'respond-poll', component: PollRespondComponent },
 ];
 
 @NgModule({

@@ -1,3 +1,5 @@
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <div class="container">
 	<div class="row">
 		<div class="col-12">
@@ -27,9 +29,11 @@
 												</div>
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-12">
-												<div class="form-group date">
-													<label class="control-label">Creation Date</label>
-													<input type="text" data-provide="datepicker" class="form-control datepicker" >		
+												<div class="form-group">
+													<label>Creation Date</label><br />
+													<input matInput [matDatepicker]="picker0" [value]="poll.creationDate" class="my-date-picker">
+													<mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+													<mat-datepicker #picker0></mat-datepicker>
 												</div>
 											</div>
 										</div>
@@ -42,8 +46,10 @@
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-12">
 												<div class="form-group">
-													<label class="control-label">Due Date</label>
-													<input type="text" class="form-control" >
+													<label>Due Date</label><br />
+													<input matInput [matDatepicker]="picker1" [value]="poll.dueDate" class="my-date-picker">
+													<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+													<mat-datepicker #picker1></mat-datepicker>
 												</div>
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-12">
@@ -65,18 +71,18 @@
 											</app-grid-question-options>
 										</div>
 										<div class="form-group">
-											<a href="#" class="btn btn-primary">Add Question</a>
-											<a href="#" class="btn btn-secondary">Edit Question</a>
-											<a href="#" class="btn btn-danger">Delete Question</a>
+											<button mat-button class="btn btn-primary" (click)="addQuestion()">Add Question</button>
+											<button  class="btn btn-secondary">Edit Question</button>
+											<button  class="btn btn-danger">Delete Question</button>
 										</div>
 									</div>
 								</div>
 								<div class="col-12">
 									<label class="control-label">Save and countinue</label>
 									<input type="checkbox" class="checkbox">
-									<a href="#" class="btn btn-primary">Save Poll</a>
-									<a href="#" class="btn btn-danger">Delete Poll</a>
-									<a href="#" class="btn btn-secondary">Cancel</a>
+									<button class="btn btn-primary">Save Poll</button>
+									<button class="btn btn-danger">Delete Poll</button>
+									<button class="btn btn-secondary">Cancel</button>
 								</div>
 							</div>
 						</div>
@@ -85,7 +91,11 @@
 			</fieldset>
 		</div>
 	</div>
+
+
 </div>
 <br>
 <br>
 <br>
+
+  
