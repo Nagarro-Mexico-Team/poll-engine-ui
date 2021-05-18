@@ -13,7 +13,7 @@ export class PollFormComponent implements OnInit {
 	gridData: GridData;
 
 	constructor() {
-		
+		this.gridData = {rows:[],fieldNames: []};
 	}
 
 	ngOnInit(): void {
@@ -21,9 +21,10 @@ export class PollFormComponent implements OnInit {
 	}
 
 	prepareGridData() {
-		this.gridData = {rows:[],fieldNames: []};
+		
 		this.gridData.rows = this.poll.questions.map((question) => {
 			return {
+				"questionId": question.questionId,
 				"questionNumber": question.questionNumber,
 				"questionText": question.questionText,
 				"questionValue": question.questionValue,
@@ -31,7 +32,7 @@ export class PollFormComponent implements OnInit {
 				"questionHint": question.questionHint
 			}
 		});
-		this.gridData.fieldNames = ["questionNumber","questionText",
+		this.gridData.fieldNames = ["questionId", "questionNumber","questionText",
 				"questionValue","questionAnswer","questionHint"]
 	}
 

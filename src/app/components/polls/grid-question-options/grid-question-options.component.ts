@@ -8,7 +8,10 @@ import { GridData } from '../../commons/grids/basic-grid/basic-grid.component';
 })
 export class GridQuestionOptionsComponent implements OnInit {
 	@Input() gridData: GridData;
-	gridQuestionsColumnNames: string[] = ["#", "Question", "Answer", "Hint", "Select"];
+	@Input() showSelectColumn: boolean;
+	@Input() showActionsColumn: boolean;
+	@Input() idFieldName: string;
+	gridQuestionsColumnNames: string[] = ["#", "Number", "Question", "Value", "Answer", "Hint"];
 
 	constructor() { }
 

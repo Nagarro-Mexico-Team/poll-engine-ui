@@ -1,4 +1,5 @@
 export class Question {
+	questionId: number;
 	questionNumber: number;
 	questionText: string;
 	questionValue: number;
@@ -6,6 +7,7 @@ export class Question {
 	questionHint: string;
 
 	constructor () {
+		this.questionId = -1;
 		this.questionNumber = 0;
 		this.questionText = "";
 		this.questionValue = 0;

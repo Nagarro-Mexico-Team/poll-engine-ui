@@ -8,6 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BasicGridComponent implements OnInit {
 	@Input() columnNames : string[] = [];
 	@Input() gridData: GridData;
+	@Input() showSelectColumn: boolean;
+	@Input() showActionsColumn: boolean;
+	@Input() idFieldName: string;
 
 	constructor() { }
 
