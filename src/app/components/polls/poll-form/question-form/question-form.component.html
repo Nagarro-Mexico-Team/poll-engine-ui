@@ -1,0 +1,48 @@
+<div class="modal fade" id="questionFormDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>Create new poll</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-12">
+						<div class="form">
+							<div class="form-group">
+								<label class="control-label">Question Id</label><br>
+								<input type="text" class="my-form-control-id" [readonly]="true" [disabled]="true">
+							</div>
+							<div class="form-group">
+								<label class="control-label">Question Text</label>
+								<input type="text" class="form-control" >
+							</div>
+							<div class="form-group date">
+								<label class="control-label">Value</label>
+								<input type="text" class="form-control datepicker" >
+							</div>
+							
+							<div class="form-group">
+								<label class="control-label">Answer</label>
+								<input type="text" class="form-control" >
+							</div>
+							<div class="form-group">
+								<label class="control-label">Hint</label>
+								<input type="text" class="form-control" >
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<label class="control-label mr-2" for="saveAndContinueChx">Save and countinue</label>
+					<input id="saveAndContinueChx" type="checkbox" class="checkbox">
+					<button class="btn btn-primary ml-2 mr-2">Save Poll</button>
+					<button class="btn btn-danger mr-2">Delete Poll</button>
+					<button class="btn btn-secondary mr-2">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -23,6 +23,7 @@ import { PollViewComponent } from './components/polls/poll-view/poll-view.compon
 import { PollRespondComponent } from './components/polls/poll-respond/poll-respond.component';
 import { BasicGridComponent } from './components/commons/grids/basic-grid/basic-grid.component';
 import { GridQuestionOptionsComponent } from './components/polls/grid-question-options/grid-question-options.component';
+import { QuestionFormComponent } from './components/polls/poll-form/question-form/question-form.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { GridQuestionOptionsComponent } from './components/polls/grid-question-o
     PollViewComponent,
     PollRespondComponent,
     BasicGridComponent,
-    GridQuestionOptionsComponent
+    GridQuestionOptionsComponent,
+    QuestionFormComponent
   ],
   imports: [
     BrowserModule,
