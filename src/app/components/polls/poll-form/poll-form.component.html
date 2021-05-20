@@ -75,7 +75,7 @@
 										<div class="row">
 											<div class="col-12">
 												<div class="form-group">
-													<button type="button" id="addQuestionBtn" class="btn btn-primary mr-2" data-toogle="modal" data-target="questionFormDialog">Add Question</button>
+													<button type="button" id="addQuestionBtn" class="btn btn-primary mr-2" (click)="addNewQuestionClick(questionForm)" >Add Question</button>
 													<button class="btn btn-secondary mr-2">Edit Question</button>
 													<button class="btn btn-danger mr-2">Delete Question</button>
 												</div>
@@ -102,6 +102,8 @@
 <br>
 <br>
 
+<ng-template #questionForm let-modal>
 
-<app-question-form></app-question-form>
+	<app-question-form [modal]="modal"></app-question-form>
 
+</ng-template>

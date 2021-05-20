@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Poll } from '../../../models/poll';
 import { GridData } from '../../commons/grids/basic-grid/basic-grid.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-poll-form',
@@ -11,8 +12,10 @@ export class PollFormComponent implements OnInit {
 
 	@Input() poll: Poll;
 	gridData: GridData;
+	showOp: boolean = false;
+	modal: any;
 
-	constructor() {
+	constructor(private modalService: NgbModal) {
 		this.gridData = {rows:[],fieldNames: []};
 	}
 
@@ -36,4 +39,9 @@ export class PollFormComponent implements OnInit {
 				"questionValue","questionAnswer","questionHint"]
 	}
 
+	addNewQuestionClick(content: any) {
+		console.log(content);
+ 		this.modal = content;
+ 		this.modalService.open(content, {centered: true, size: 'xl'});
+	}
 }

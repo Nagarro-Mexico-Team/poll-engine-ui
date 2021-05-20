@@ -24,6 +24,8 @@ import { PollRespondComponent } from './components/polls/poll-respond/poll-respo
 import { BasicGridComponent } from './components/commons/grids/basic-grid/basic-grid.component';
 import { GridQuestionOptionsComponent } from './components/polls/grid-question-options/grid-question-options.component';
 import { QuestionFormComponent } from './components/polls/poll-form/question-form/question-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,10 @@ import { QuestionFormComponent } from './components/polls/poll-form/question-for
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    NgbModule,
+    NgbPaginationModule, 
+    NgbAlertModule,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
