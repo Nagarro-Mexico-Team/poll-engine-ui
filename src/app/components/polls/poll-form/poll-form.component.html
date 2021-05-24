@@ -63,7 +63,7 @@
 											<div class="col-12">
 												<div class="form-group">
 													<label class="control-label">Questions</label>
-													<app-grid-question-options 
+													<app-grid-question-options
 														[gridData]="gridData"
 														[showActionsColumn]="false"
 														[showSelectColumn]="true"
@@ -93,7 +93,7 @@
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</fieldset>
 		</div>
 	</div>
@@ -104,6 +104,9 @@
 
 <ng-template #questionForm let-modal>
 
-	<app-question-form [modal]="modal"></app-question-form>
+	<app-question-form [modal]="modal"
+  (onSave)="doOnSaveQuestion($event)">
+
+  </app-question-form>
 
 </ng-template>
