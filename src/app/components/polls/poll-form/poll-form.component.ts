@@ -35,17 +35,17 @@ export class PollFormComponent implements OnInit {
         "questionHint": question.questionHint
       }
     });
-    this.gridData.fieldNames = ["questionId", "questionNumber", "questionText",
-      "questionValue", "questionAnswer", "questionHint"]
+    this.gridData.fieldNames = ['questionId', "questionNumber", "questionText",
+      'questionValue', "questionAnswer", "questionHint"]
   }
 
-  addNewQuestionClick(content: any) {
+  addNewQuestionClick(content: any): void {
     console.log(content);
     this.modal = content;
     this.modalService.open(content, {centered: true, size: 'xl'});
   }
 
-  doOnSaveQuestion(item: any) {
+  doOnSaveQuestion(item: any): void {
     console.log(item);
     this.gridData.rows.push(item);
   }

@@ -9,10 +9,14 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 export class QuestionFormComponent implements OnInit {
   @Input() modal: any;
   @Output() onSave: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onSaveAndContinue: EventEmitter<any> = new EventEmitter<any>();
-  //@Output()    onCancel()
+  @Output() onCancel: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
 
   questionForm: any;
+  chkSaveAndContinue: boolean = false;
+  saveMessage: String = "Question was saved successfully!";
+  questionSaved: boolean = false;
+  submitted: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
 
@@ -20,7 +24,11 @@ export class QuestionFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionForm = this.formBuilder.group({
+    this.questionForm = this.buildForm();
+  }
+
+  buildForm(): FormGroup {
+    return this.formBuilder.group({
       questionId: [-1],
       questionNumber: [1, Validators.required],
       questionText: ['', Validators.required],
@@ -30,10 +38,26 @@ export class QuestionFormComponent implements OnInit {
     });
   }
 
+  doSaveQuestionClick(event: any) {
+  	console.log("QuestionFormComponent::doSaveQuestionClick");
+    this.submitted = true;
+    if (this.questionForm.valid) {
+      this.onSave.emit(this.questionForm.value);
+      this.questionSaved = true;
+      this.questionForm = this.buildForm();
+      this.submitted = false;
+      if (this.chkSaveAndContinue == false) {
+        this.onClose.emit(true); // notifies the modal close event
+        this.modal.close(); // closes the modal dialog.
+      }
+    } else {
+      this.questionSaved = false;
+    }
 
-  doSaveQuestionClick(event) {
-  	if (this.questionForm.valid) {
-	  	this.onSave.emit(this.questionForm.value)
-	}
   }
+
+  doSaveAndContinueCheckOnChange(event) {
+    this.chkSaveAndContinue = !this.chkSaveAndContinue;
+  }
+
 }

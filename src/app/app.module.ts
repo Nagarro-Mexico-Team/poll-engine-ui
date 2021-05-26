@@ -5,7 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {ContentComponent} from './components/layout/content/content.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {FooterComponent} from './components/layout/footer/footer.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './components/layout/header/header.component';
 import {LoginComponent} from './components/login/login.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -43,16 +43,17 @@ import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-b
     GridQuestionOptionsComponent,
     QuestionFormComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        NgbModule,
-        NgbPaginationModule,
-        NgbAlertModule,
-        ReactiveFormsModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    NgbModule,
+    NgbPaginationModule,
+    NgbAlertModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
@@ -62,4 +63,5 @@ import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-b
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
