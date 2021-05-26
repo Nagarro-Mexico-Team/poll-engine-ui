@@ -2,22 +2,26 @@
 	<thead class="thead-dark">
 		<tr>
 			<th *ngFor="let col of columnNames">{{col}}</th>
-			<th>Actions</th>
+			<th *ngIf="showSelectColumn">Select</th>
+			<th *ngIf="showActionsColumn">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let row of gridData.rows">
 			<td *ngFor="let field of gridData.fieldNames">{{row[field]}}</td>
-			<td>
-				<a href="#" class="btn btn-sm btn-primary">Edit</a>
-				<a href="#" class="btn btn-sm btn-danger">Delete</a>
-				<a href="#" class="btn btn-sm btn-secondary">View</a>
+			<td *ngIf="showSelectColumn"><input type="radio" value="{{row[idFieldName]}}" [checked]="true" ></td>
+			<td *ngIf="showActionsColumn">
+				<button class="btn btn-sm btn-primary mr-1">Edit</button>
+				<button class="btn btn-sm btn-danger mr-1">Delete</button>
+				<button class="btn btn-sm btn-secondary mr-1">View</button>
 			</td>
 		</tr>
 	</tbody>
 	<tfoot>
 		<tr class="thead-dark" >
-			<th [colspan]="gridData.rows.length+1">Total of rows: {{ gridData.rows.length }}</th>
-		</tr>	
+			<th [attr.colspan]="columnNames.length">Total of rows: {{ gridData.rows.length }}</th>
+			<th *ngIf="showSelectColumn">Select</th>
+			<th *ngIf="showActionsColumn">Actions</th>
+		</tr>
 	</tfoot>
 </table>
