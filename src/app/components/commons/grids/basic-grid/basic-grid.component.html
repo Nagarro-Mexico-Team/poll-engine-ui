@@ -7,9 +7,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let row of gridData.rows">
+		<tr *ngFor="let row of gridData.rows; let idx = index">
 			<td *ngFor="let field of gridData.fieldNames">{{row[field]}}</td>
-			<td *ngIf="showSelectColumn"><input type="radio" value="{{row[idFieldName]}}" [checked]="true" ></td>
+			<td *ngIf="showSelectColumn"><input type="radio" name="selectedItem" value="{{row[idFieldName]}}" 
+				(change)="doOnSelectedRowChange(idx)" [checked]="selectedIndex == idx" ></td>
 			<td *ngIf="showActionsColumn">
 				<button class="btn btn-sm btn-primary mr-1">Edit</button>
 				<button class="btn btn-sm btn-danger mr-1">Delete</button>

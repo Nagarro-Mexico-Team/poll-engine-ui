@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GridData } from '../../commons/grids/basic-grid/basic-grid.component';
 
 @Component({
@@ -11,6 +11,8 @@ export class GridQuestionOptionsComponent implements OnInit {
 	@Input() showSelectColumn: boolean;
 	@Input() showActionsColumn: boolean;
 	@Input() idFieldName: string;
+	@Input() selectedIndex: number;
+	@Output() onSelectionChange: EventEmitter<any> = new EventEmitter<any>( ); 
 	gridQuestionsColumnNames: string[] = ["#", "Number", "Question", "Value", "Answer", "Hint"];
 
 	constructor() { }
@@ -19,4 +21,7 @@ export class GridQuestionOptionsComponent implements OnInit {
 		console.log(["GridQuestionOptionsComponent::onInit",this.gridData, this.gridQuestionsColumnNames]);
 	}
 
+	doOnSelectionChange(event) {
+		this.onSelectionChange.emit(event);
+	}
 }

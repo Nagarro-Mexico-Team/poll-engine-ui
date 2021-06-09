@@ -14,6 +14,12 @@ export class PollFormComponent implements OnInit {
   gridData: GridData;
   showOp: boolean = false;
   modal: any;
+  crudMode: string;
+  selectedItem: any;
+  selectedIndex: number;
+  creationDt: string;
+  dueDt: string;
+  placement: any;
 
   constructor(private modalService: NgbModal) {
     this.gridData = {rows: [], fieldNames: []};
@@ -21,6 +27,8 @@ export class PollFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepareGridData();
+    this.selectedItem = {};
+    this.selectedIndex = 0;
   }
 
   prepareGridData() {
@@ -42,11 +50,34 @@ export class PollFormComponent implements OnInit {
   addNewQuestionClick(content: any): void {
     console.log(content);
     this.modal = content;
+    this.crudMode = 'create';
+    this.modalService.open(content, {centered: true, size: 'xl'});
+  }
+
+  editQuestionClick(content: any) {
+    console.log(content);
+    this.modal = content;
+    this.crudMode = 'update';
+    console.log(this.gridData.rows);
+    this.selectedItem = this.poll.questions[this.selectedIndex];
+    console.log(this.selectedItem);
     this.modalService.open(content, {centered: true, size: 'xl'});
   }
 
   doOnSaveQuestion(item: any): void {
     console.log(item);
-    this.gridData.rows.push(item);
+    if (this.crudMode=="create") {
+      this.poll.questions.push(item);
+    } else if (this.crudMode = "update") {
+      this.poll.questions[this.selectedIndex] = item;
+    }
+    this.prepareGridData();
   }
+
+
+  doOnSelectionChange(event: number) {
+    console.log(event);
+    this.selectedIndex = event;
+  }
+
 }

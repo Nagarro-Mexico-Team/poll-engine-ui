@@ -29,7 +29,12 @@
 											<div class="col-4">
 												<div class="form-group date">
 													<label class="control-label">Creation Date</label>
-													<input type="text" data-provide="datepicker" class="form-control datepicker" >
+													<input class="form-control" placeholder="yyyy-mm-dd"
+													name="dpCreationDt" [(ngModel)]="creationDt" ngbDatepicker #d="ngbDatepicker"
+													[placement]="placement" [positionTarget]="buttonEl" style="width: 80%; float: left;">
+													<div class="input-group-append" style="float: none;" >
+														<button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="k-calendar-icon"></i></button>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -43,7 +48,12 @@
 											<div class="col-3">
 												<div class="form-group">
 													<label class="control-label">Due Date</label>
-													<input type="text" class="form-control" >
+													<input class="form-control" placeholder="yyyy-mm-dd"
+													name="dpDueDt" [(ngModel)]="dueDt" ngbDatepicker #d1="ngbDatepicker"
+													[placement]="placement" [positionTarget]="buttonEl1" style="width: 80%; float: left;">
+													<div class="input-group-append" style="float: none;" >
+														<button #buttonEl1 class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><i class="k-calendar-icon"></i></button>
+													</div>
 												</div>
 											</div>
 											<div class="col-3">
@@ -64,39 +74,41 @@
 												<div class="form-group">
 													<label class="control-label">Questions</label>
 													<app-grid-question-options
-														[gridData]="gridData"
-														[showActionsColumn]="false"
-														[showSelectColumn]="true"
-														[idFieldName]="'questionId'">
-													</app-grid-question-options>
-												</div>
+													[gridData]="gridData"
+													[showActionsColumn]="false"
+													[showSelectColumn]="true"
+													[selectedIndex]="selectedIndex"
+													(onSelectionChange)="doOnSelectionChange($event)"
+													[idFieldName]="'questionId'">
+												</app-grid-question-options>
 											</div>
 										</div>
-										<div class="row">
-											<div class="col-12">
-												<div class="form-group">
-													<button type="button" id="addQuestionBtn" class="btn btn-primary mr-2" (click)="addNewQuestionClick(questionForm)" >Add Question</button>
-													<button class="btn btn-secondary mr-2">Edit Question</button>
-													<button class="btn btn-danger mr-2">Delete Question</button>
-												</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<div class="form-group">
+												<button type="button" id="addQuestionBtn" class="btn btn-primary mr-2" (click)="addNewQuestionClick(questionForm)" >Add Question</button>
+												<button class="btn btn-secondary mr-2" (click)="editQuestionClick(questionForm)" >Edit Question</button>
+												<button class="btn btn-danger mr-2">Delete Question</button>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-12 text-right">
-									<label class="control-label">Save and countinue</label>
-									<input type="checkbox" class="checkbox">
-									<button class="btn btn-primary mr-2">Save Poll</button>
-									<button class="btn btn-danger mr-2">Delete Poll</button>
-									<button class="btn btn-secondary mr-2">Cancel</button>
-								</div>
+							</div>
+							<div class="col-12 text-right">
+								<label class="control-label">Save and countinue</label>
+								<input type="checkbox" class="checkbox">
+								<button class="btn btn-primary mr-2">Save Poll</button>
+								<button class="btn btn-danger mr-2">Delete Poll</button>
+								<button class="btn btn-secondary mr-2">Cancel</button>
 							</div>
 						</div>
 					</div>
 				</div>
-			</fieldset>
-		</div>
+			</div>
+		</fieldset>
 	</div>
+</div>
 </div>
 <br>
 <br>
@@ -104,9 +116,12 @@
 
 <ng-template #questionForm let-modal>
 
-	<app-question-form [modal]="modal"
-  (onSave)="doOnSaveQuestion($event)">
+	<app-question-form 
+	[modal]="modal"
+	[data]="selectedItem" 
+	[crudMode]="crudMode"
+	(onSave)="doOnSaveQuestion($event)">
 
-  </app-question-form>
+</app-question-form>
 
 </ng-template>

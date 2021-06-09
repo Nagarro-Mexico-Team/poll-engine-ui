@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
 	selector: 'app-basic-grid',
@@ -11,11 +11,17 @@ export class BasicGridComponent implements OnInit {
 	@Input() showSelectColumn: boolean;
 	@Input() showActionsColumn: boolean;
 	@Input() idFieldName: string;
+	@Input() selectedIndex: number;
+	@Output() onSelectionChange: EventEmitter<any> = new EventEmitter<any>();
 
 	constructor() { }
 
 	ngOnInit(): void {
 		console.log(["BasicGridComponent::onInit",this.gridData, this.columnNames]);
+	}
+
+	doOnSelectedRowChange(index: number) {
+		this.onSelectionChange.emit(index);
 	}
 
 }

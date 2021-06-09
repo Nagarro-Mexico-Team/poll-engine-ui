@@ -1,6 +1,9 @@
 <form [formGroup]="questionForm">
   <div class="modal-header">
-    <h4 class="modal-title">Create new Question</h4>
+    <h4 class="modal-title" *ngIf="crudMode=='create'">Create new Question</h4>
+    <h4 class="modal-title" *ngIf="crudMode=='update'">Edit Question</h4>
+    <h4 class="modal-title" *ngIf="crudMode=='delete'">Delete Question</h4>
+    <h4 class="modal-title" *ngIf="crudMode=='show'">Show Question</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -29,8 +32,21 @@
             <label class="control-label">Value:</label><span class="required-field">&nbsp;*</span>
             <input type="text" formControlName="questionValue" class="form-control datepicker">
             <div class="alert alert-danger" role="alert" *ngIf="submitted && questionForm.controls['questionValue'].valid == false">
-              {{ questionForm.controls['questionValue'].errors.required ? "Question Value is required!" : "" }}
-            </div>
+              <ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+                <li *ngIf="questionForm.controls['questionValue'].errors.required">
+                  Question Value is required!
+                </li>
+                <li *ngIf="questionForm.controls['questionValue'].errors.pattern">
+                  Question Value is must be a number!
+                </li>
+                 <li *ngIf="questionForm.controls['questionValue'].errors.min">
+                  Question Value is must be a number greather than 0!
+                </li>
+                 <li *ngIf="questionForm.controls['questionValue'].errors.max">
+                  Question Value is must be a number greather than 0 and lower or equal to 100!
+                </li>
+              </ul>
+            </div>    
           </div>
 
           <div class="form-group">
@@ -46,15 +62,15 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>  
   </div>
   <div class="modal-footer">
-    <label class="control-label mr-2" for="saveAndContinueChx">Save and continue</label>
-    <input id="saveAndContinueChx" value="true" [checked]="chkSaveAndContinue" (change)="doSaveAndContinueCheckOnChange($event)"
+    <label class="control-label mr-2" for="saveAndContinueChx" *ngIf="crudMode=='create'">Save and continue</label>
+    <input id="saveAndContinueChx" value="true" *ngIf="crudMode=='create'" [checked]="chkSaveAndContinue" (change)="doSaveAndContinueCheckOnChange($event)"
            type="checkbox" class="checkbox">
-    <button class="btn btn-primary ml-2 mr-2" (click)="doSaveQuestionClick($event)" >Save Question</button>
-    <button class="btn btn-danger mr-2">Delete Question</button>
+    <button class="btn btn-primary ml-2 mr-2" *ngIf="crudMode=='create' || crudMode=='update'" (click)="doSaveQuestionClick($event)" >Save Question</button>
+    <button class="btn btn-danger mr-2" *ngIf="crudMode=='delete'" >Delete Question</button>
     <button class="btn btn-secondary mr-2" (click)="modal.close()">Cancel</button>
   </div>
-
+    
 </form>
