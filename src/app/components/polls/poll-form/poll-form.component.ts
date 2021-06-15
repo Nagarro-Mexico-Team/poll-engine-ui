@@ -1,7 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Poll} from '../../../models/poll';
 import {GridData} from '../../commons/grids/basic-grid/basic-grid.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-poll-form',
@@ -11,6 +13,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class PollFormComponent implements OnInit {
 
   @Input() poll: Poll;
+  @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
+  pollForm: any;
   gridData: GridData;
   showOp: boolean = false;
   modal: any;
@@ -20,15 +24,29 @@ export class PollFormComponent implements OnInit {
   creationDt: string;
   dueDt: string;
   placement: any;
+  submitted: boolean;
+  chkSaveAndContinue: boolean;
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder) {
     this.gridData = {rows: [], fieldNames: []};
   }
 
   ngOnInit(): void {
+    this.pollForm = this.buildForm();
     this.prepareGridData();
     this.selectedItem = {};
     this.selectedIndex = 0;
+  }
+
+  buildForm(): FormGroup {
+    return this.formBuilder.group({
+      pollId: [-1],
+      title: ['', Validators.required],
+      creationDate: ['', Validators.required],
+      clientName: ['', Validators.required],
+      dueDate: ['', Validators.required],
+      status: [1, Validators.required]
+    });
   }
 
   prepareGridData() {
@@ -44,7 +62,7 @@ export class PollFormComponent implements OnInit {
       }
     });
     this.gridData.fieldNames = ['questionId', "questionNumber", "questionText",
-      'questionValue', "questionAnswer", "questionHint"]
+    'questionValue', "questionAnswer", "questionHint"]
   }
 
   addNewQuestionClick(content: any): void {
@@ -78,6 +96,23 @@ export class PollFormComponent implements OnInit {
   doOnSelectionChange(event: number) {
     console.log(event);
     this.selectedIndex = event;
+  }
+
+  doOnClickSavePoll(event) {
+    console.log("PollForm::doSavePollClick");
+    this.submitted = true;
+    if (this.pollForm.valid) {
+      
+      this.submitted = false;
+      if (this.chkSaveAndContinue == false) {
+        this.onClose.emit(true); // notifies the modal close event
+        this.modal.close(); // closes the modal dialog.
+      }
+    } 
+  }
+
+  doSaveAndContinueCheckOnChange(event) {
+    this.chkSaveAndContinue = !this.chkSaveAndContinue;
   }
 
 }

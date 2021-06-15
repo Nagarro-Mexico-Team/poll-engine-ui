@@ -8,14 +8,14 @@
 							<h3>Create new poll</h3>
 						</div>
 						<div class="card-body">
-							<div class="row">
-								<div class="col-12">
-									<div class="form">
+							<form [formGroup]="pollForm">
+								<div class="row">
+									<div class="col-12">
 										<div class="row">
 											<div class="col-12">
 												<div class="form-group">
 													<label class="control-label">Poll Id</label><br>
-													<input type="text" class="my-form-control-id" [readonly]="true" [disabled]="true">
+													<input type="text" formControlName="pollId" class="my-form-control-id" [readonly]="true" [disabled]="true">
 												</div>
 											</div>
 										</div>
@@ -23,17 +23,31 @@
 											<div class="col-8">
 												<div class="form-group">
 													<label class="control-label">Title</label>
-													<input type="text" class="form-control" >
+													<input type="text" formControlName="title" class="form-control" >
+													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['title'].valid == false">
+														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+															<li *ngIf="pollForm.controls['title'].errors.required">
+																Title is required!
+															</li>
+														</ul>
+													</div> 
 												</div>
 											</div>
 											<div class="col-4">
 												<div class="form-group date">
 													<label class="control-label">Creation Date</label>
 													<input class="form-control" placeholder="yyyy-mm-dd"
-													name="dpCreationDt" [(ngModel)]="creationDt" ngbDatepicker #d="ngbDatepicker"
+													name="dpCreationDt" formControlName="creationDate" ngbDatepicker #d="ngbDatepicker"
 													[placement]="placement" [positionTarget]="buttonEl" style="width: 80%; float: left;">
 													<div class="input-group-append" style="float: none;" >
-														<button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="k-calendar-icon"></i></button>
+														<button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">...<i class="k-calendar-icon"></i></button>
+													</div>
+													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['creationDate'].valid == false">
+														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+															<li *ngIf="pollForm.controls['creationDate'].errors.required">
+																Creation Date is required!
+															</li>
+														</ul>
 													</div>
 												</div>
 											</div>
@@ -42,18 +56,32 @@
 											<div class="col-6">
 												<div class="form-group">
 													<label class="control-label">Client</label>
-													<input type="text" class="form-control" >
+													<input type="text" formControlName="clientName" class="form-control" >
+													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['clientName'].valid == false">
+														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+															<li *ngIf="pollForm.controls['clientName'].errors.required">
+																Client's name is required!
+															</li>
+														</ul>
+													</div> 
 												</div>
 											</div>
 											<div class="col-3">
 												<div class="form-group">
 													<label class="control-label">Due Date</label>
 													<input class="form-control" placeholder="yyyy-mm-dd"
-													name="dpDueDt" [(ngModel)]="dueDt" ngbDatepicker #d1="ngbDatepicker"
+													name="dpDueDt" formControlName="dueDate" ngbDatepicker #d1="ngbDatepicker"
 													[placement]="placement" [positionTarget]="buttonEl1" style="width: 80%; float: left;">
 													<div class="input-group-append" style="float: none;" >
-														<button #buttonEl1 class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><i class="k-calendar-icon"></i></button>
+														<button #buttonEl1 class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">...<i class="k-calendar-icon"></i></button>
 													</div>
+													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['dueDate'].valid == false">
+														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+															<li *ngIf="pollForm.controls['dueDate'].errors.required">
+																Due Date is required!
+															</li>
+														</ul>
+													</div> 
 												</div>
 											</div>
 											<div class="col-3">
@@ -83,33 +111,35 @@
 												</app-grid-question-options>
 											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-12">
-											<div class="form-group">
-												<button type="button" id="addQuestionBtn" class="btn btn-primary mr-2" (click)="addNewQuestionClick(questionForm)" >Add Question</button>
-												<button class="btn btn-secondary mr-2" (click)="editQuestionClick(questionForm)" >Edit Question</button>
-												<button class="btn btn-danger mr-2">Delete Question</button>
+										<div class="row">
+											<div class="col-12">
+												<div class="form-group">
+													<button type="button" id="addQuestionBtn" class="btn btn-primary mr-2" (click)="addNewQuestionClick(questionForm)" >Add Question</button>
+													<button class="btn btn-secondary mr-2" (click)="editQuestionClick(questionForm)" >Edit Question</button>
+													<button class="btn btn-danger mr-2">Delete Question</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								<div class="card-footer col-12 text-right">
+									<label class="control-label mr-2" for="saveAndContinueChx">Save and continue</label>
+									<input id="saveAndContinueChx" value="true" [checked]="chkSaveAndContinue" (change)="doSaveAndContinueCheckOnChange($event)"
+									type="checkbox" class="checkbox">
+									<button class="btn btn-primary ml-2 mr-2" (click)="doOnClickSavePoll($event)" >Save Poll</button>
+									<button class="btn btn-danger mr-2"  >Delete Poll</button>
+									<button class="btn btn-secondary mr-2" >Cancel</button>
+								</div>
 							</div>
-							<div class="col-12 text-right">
-								<label class="control-label">Save and countinue</label>
-								<input type="checkbox" class="checkbox">
-								<button class="btn btn-primary mr-2">Save Poll</button>
-								<button class="btn btn-danger mr-2">Delete Poll</button>
-								<button class="btn btn-secondary mr-2">Cancel</button>
-							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
+
 		</fieldset>
 	</div>
 </div>
-</div>
+
 <br>
 <br>
 <br>
