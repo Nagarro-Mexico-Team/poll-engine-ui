@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PollsService, Poll } from '../../../services/polls.service';
 
 @Component({
 	selector: 'app-polls-list',
@@ -6,30 +7,39 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./polls-list.component.css']
 })
 export class PollsListComponent implements OnInit {
-	dataSource: any[] = [
-			{
-				id: 1,
-				activity_module: "create poll",
-				datetime: new Date(),
-				reference_id: 1000
-			},
-			{
-				id: 2,
-				activity_module: "update poll",
-				datetime: new Date(),
-				reference_id: 1010
-			},
-			{
-				id: 3,
-				activity_module: "create a new poll",
-				datetime: new Date(),
-				reference_id: 1030
-			}
-		];
-		
-	constructor() { }
+	dataSource: any[] = [];
+	statusesList = {
+		1: "Created",
+		2: "Scheduled",
+		3: "Presented",
+		4: "Evaluated",
+		5: "Completed",
+	};
+	poll: Poll;
+	mode: string = "list";
+
+
+	constructor(private pollsService: PollsService) {
+		this.poll = new Poll();
+	}
 
 	ngOnInit(): void {
+		this.pollsService.getPolls()
+		 	.subscribe(data => {
+		 		console.log(data);
+		 		this.dataSource = data;
+		 	});
+	}
+
+	doCreateNewPoll() {
+		this.mode = 'create';
+	}
+
+	doOnSavePoll(event: any) {
+		this.pollsService.savePoll(event)
+			.subscribe(data => {
+				this.dataSource.push(data);
+			});
 	}
 
 }

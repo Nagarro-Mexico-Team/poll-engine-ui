@@ -2,6 +2,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
 import {ContentComponent} from './components/layout/content/content.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {FooterComponent} from './components/layout/footer/footer.component';
@@ -22,6 +23,7 @@ import {BasicGridComponent} from './components/commons/grids/basic-grid/basic-gr
 import {GridQuestionOptionsComponent} from './components/polls/grid-question-options/grid-question-options.component';
 import {QuestionFormComponent} from './components/polls/poll-form/question-form/question-form.component';
 import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
+import {PollsService} from './services/polls.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-b
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -60,7 +63,7 @@ import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-b
   exports: [
     MatToolbarModule
   ],
-  providers: [],
+  providers: [PollsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

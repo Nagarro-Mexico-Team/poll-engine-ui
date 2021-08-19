@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Poll } from '../../../models/poll';
 
 @Component({
@@ -7,6 +7,11 @@ import { Poll } from '../../../models/poll';
 	styleUrls: ['./poll-create.component.css']
 })
 export class PollCreateComponent implements OnInit {
+	@Input() poll: Poll;
+	@Output() onSave: EventEmitter<any> = new EventEmitter<any>();
+	@Output() onSaveAndContinue: EventEmitter<any> = new EventEmitter<any>();
+	@Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
+	@Output() onClose: EventEmitter<any> = new EventEmitter<any>();
 
 	model: Poll;
 
@@ -15,6 +20,22 @@ export class PollCreateComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+	}
+
+	doOnSavePoll(event) {
+		this.onSave.emit(event);
+	}
+
+	doOnSaveAndContinue(event) {
+		this.onSaveAndContinue.emit(event);
+	}
+
+	doOnDeletePoll(event) {
+		this.onDelete.emit(event);
+	}
+
+	doOnClose(event) {
+		this.onClose.emit(true); 
 	}
 
 }

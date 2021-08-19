@@ -1,2 +1,9 @@
 <br>
-<app-poll-form [poll]="model" ></app-poll-form>
+<app-poll-form [poll]="model" 
+	(onSave)="doOnSavePoll($event)"
+	(onSaveAndContinue)="doOnSaveAndContinuePoll($event)"
+	(onDelete)="doOnDeletePoll($event)"
+	(onClose)="doOnClose($event)"
+>
+	
+</app-poll-form>

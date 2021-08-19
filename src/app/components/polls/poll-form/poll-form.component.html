@@ -8,6 +8,12 @@
 							<h3>Create new poll</h3>
 						</div>
 						<div class="card-body">
+							<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.valid == false">
+								<span>There are some errors you need to resolve.</span>
+							</div> 
+							<div class="alert alert-success" role="alert" *ngIf="submitted && pollForm.valid == true">
+								<span>Poll was successfully created!</span>
+							</div> 
 							<form [formGroup]="pollForm">
 								<div class="row">
 									<div class="col-12">
@@ -56,7 +62,12 @@
 											<div class="col-6">
 												<div class="form-group">
 													<label class="control-label">Client</label>
-													<input type="text" formControlName="clientName" class="form-control" >
+													<input type="text" formControlName="clientName" class="form-control" 
+													[ngbTypeahead]="search"
+													[inputFormatter]="formatter"
+													[resultFormatter]="formatter"
+													[editable]='false'>
+
 													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['clientName'].valid == false">
 														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
 															<li *ngIf="pollForm.controls['clientName'].errors.required">
