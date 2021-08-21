@@ -17,10 +17,12 @@ export class PollsListComponent implements OnInit {
 	};
 	poll: Poll;
 	mode: string = "list";
+	dataSavedOK: boolean;
 
 
 	constructor(private pollsService: PollsService) {
 		this.poll = new Poll();
+		this.dataSavedOK = false;
 	}
 
 	ngOnInit(): void {
@@ -31,15 +33,19 @@ export class PollsListComponent implements OnInit {
 		 	});
 	}
 
-	doCreateNewPoll() {
+	doCreateNewPoll(event) {
+		event.preventDefault();
 		this.mode = 'create';
 	}
 
-	doOnSavePoll(event: any) {
-		this.pollsService.savePoll(event)
-			.subscribe(data => {
-				this.dataSource.push(data);
-			});
+	doOnSavePoll(data: any) {
+		this.dataSavedOK = true;
+		this.dataSource.push(data);
+		this.mode = 'list';
+	}
+
+	doOnCloseCreatePoll(event) {
+		this.mode = 'list';
 	}
 
 }

@@ -1,5 +1,6 @@
 <br>
-<app-poll-form [poll]="model" 
+<app-poll-form [poll]="model"
+	[crudMode]="'create'"
 	(onSave)="doOnSavePoll($event)"
 	(onSaveAndContinue)="doOnSaveAndContinuePoll($event)"
 	(onDelete)="doOnDeletePoll($event)"

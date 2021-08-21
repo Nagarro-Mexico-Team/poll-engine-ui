@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'poll-engine-ui';
   isLoggedIn: boolean = false;
+  selectedMenu: string = 'None';
 
   doLogin($event) {
   	console.log($event);
@@ -18,5 +19,9 @@ export class AppComponent {
   	console.log(event);
   	this.isLoggedIn = false;
   }
+
+  doOnMenuSelect(event: string): void {
+    this.selectedMenu = event;
+  } 
 
 }

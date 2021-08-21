@@ -177,13 +177,17 @@ export class PollFormComponent implements OnInit {
       } else {
         this.onSave.emit(this.poll);
         this.onClose.emit(true); // notifies the modal close event
-        this.modal.close(); // closes the modal dialog.  
+        
       }
     } 
   }
 
   doSaveAndContinueCheckOnChange(event) {
     this.chkSaveAndContinue = !this.chkSaveAndContinue;
+  }
+
+  doOnCancel(event) {
+    this.onClose.emit(true);
   }
 
 

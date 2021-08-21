@@ -11,12 +11,38 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
 					</li>
-					<li><a mat-button [routerLink]="'/polls'"> Polls </a></li>			
-					<li><a mat-button href="/create-poll"> Create poll </a></li>
-					<li><a mat-button [routerLink]="'/respond-poll'"> Respond to poll </a></li>
-					<li><a mat-button [routerLink]="'/users'"> Create User </a></li>
-					<li><a mat-button [routerLink]="'/activities'"> Activities </a></li>
-					<li><a mat-button href="#" (click)="logout()">Logout</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Polls
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('polls')" >List polls</a>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('create-poll')">Create poll</a>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('resolve-poll')">Resolve poll</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('evaluate-poll')">Poll results</a>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Clients
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('polls')" >Clients List polls</a>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('create-poll')">Create poll</a>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('resolve-poll')">Resolve poll</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('evaluate-poll')">Poll results</a>
+						</div>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link dropdown-toggle" href="#">Access control</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('users')">Users</a>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('roles')">Roles</a>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('permissions')">Permissions</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('log-audit')">Log Audit</a>
+						</div>
+					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

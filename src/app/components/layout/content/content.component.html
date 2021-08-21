@@ -9,7 +9,15 @@
 			</div>
 			<div class="row" *ngIf="isLoggedIn">
 				<div class="col-12">
-					<router-outlet></router-outlet>
+					<app-dashboard *ngIf="selectedMenu == 'dashboard'">
+						
+					</app-dashboard>
+					<app-polls-list *ngIf="selectedMenu == 'polls'">
+
+					</app-polls-list>
+					<app-polls-create *ngIf="selectedMenu == 'create-poll'">
+
+					</app-polls-create>
 				</div>
 				
 			</div>

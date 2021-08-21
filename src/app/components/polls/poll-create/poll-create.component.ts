@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Poll } from '../../../models/poll';
+import {PollsService} from '../../../services/polls.service';
 
 @Component({
 	selector: 'app-poll-create',
@@ -15,7 +16,7 @@ export class PollCreateComponent implements OnInit {
 
 	model: Poll;
 
-	constructor() { 
+	constructor(private pollsService: PollsService) { 
 		this.model = new Poll();
 	}
 
@@ -23,10 +24,14 @@ export class PollCreateComponent implements OnInit {
 	}
 
 	doOnSavePoll(event) {
-		this.onSave.emit(event);
+		this.pollsService.savePoll(event)
+			.subscribe(data => {
+				this.onSave.emit(data);
+			});
+		
 	}
 
-	doOnSaveAndContinue(event) {
+	doOnSaveAndContinuePoll(event) {
 		this.onSaveAndContinue.emit(event);
 	}
 

@@ -8,11 +8,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ContentComponent implements OnInit {
 	@Input() isLoggedIn: boolean;
 	@Output() onLogin: EventEmitter<any> = new EventEmitter<any>();
+	@Input() selectedMenu: string;
 	username: string;
 
 	constructor() { }
 
 	ngOnInit(): void {
+		this.selectedMenu = 'dashboard';
 	}
 
 	doOnLoginSuccess($event) {
