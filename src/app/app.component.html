@@ -1,11 +1,11 @@
-<app-header (onLogout)="doLogout($event)"
-            (onMenuSelect)="doOnMenuSelect($event)">
+<app-header 
+	[isLoggedIn]="isLoggedIn"
+	(onLogout)="doOnLogout($event)"
+	(onMenuSelect)="doOnMenuSelect($event)">
 </app-header>
 <app-content 
 	[isLoggedIn]="isLoggedIn"
 	[selectedMenu]="selectedMenu"
 	(onLogin)="doLogin($event)">
-
-	
 </app-content>
 <app-footer></app-footer>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Input() isLoggedIn: boolean;
   @Output() onMenuSelect: EventEmitter<any> = new EventEmitter<any>();
 	@Output() onLogout: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -21,6 +22,11 @@ export class HeaderComponent implements OnInit {
   doOnMenuSelect(event) {
     console.log(event);
     this.onMenuSelect.emit(event);
+  }
+
+  doOnLogout(event) {
+    console.log(event);
+    this.onLogout.emit(event);
   }
 
 }

@@ -7,7 +7,7 @@ export class Question {
 	questionHint: string;
 
 	constructor () {
-		this.questionId = -1;
+		this.questionId = null;
 		this.questionNumber = 0;
 		this.questionText = "";
 		this.questionValue = 0;

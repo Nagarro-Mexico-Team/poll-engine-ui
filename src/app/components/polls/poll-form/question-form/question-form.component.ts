@@ -7,7 +7,7 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./question-form.component.css']
 })
 export class QuestionFormComponent implements OnInit {
-  @Input() modal: any;
+  private _modal: any;
   @Input() crudMode: string;
   @Input() data: any;
   @Output() onSave: EventEmitter<any> = new EventEmitter<any>();
@@ -15,13 +15,24 @@ export class QuestionFormComponent implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
 
   questionForm: any;
-  chkSaveAndContinue: boolean = false;
+  chkSaveAndContinue: boolean;
   saveMessage: String = "Question was saved successfully!";
   questionSaved: boolean = false;
   submitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {
 
+  @Input() 
+  set modal(value: any) {
+    console.log(value);
+    this._modal = value;
+  }
+
+  get modal(): any {
+    return this._modal;
+  }
+
+  constructor(private formBuilder: FormBuilder) {
+    this.chkSaveAndContinue = false;
 
   }
 
@@ -59,8 +70,8 @@ export class QuestionFormComponent implements OnInit {
       this.questionForm = this.buildForm();
       this.submitted = false;
       if (this.chkSaveAndContinue == false) {
+        this.modal.close();
         this.onClose.emit(true); // notifies the modal close event
-        this.modal.close(); // closes the modal dialog.
       }
     } else {
       this.questionSaved = false;

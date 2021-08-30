@@ -15,12 +15,15 @@
 					<app-polls-list *ngIf="selectedMenu == 'polls'">
 
 					</app-polls-list>
-					<app-polls-create *ngIf="selectedMenu == 'create-poll'">
+					<app-poll-create *ngIf="selectedMenu == 'create-poll'"
+					
+					[crudMode]="'create'"
+					>
 
-					</app-polls-create>
-				</div>
-				
+				</app-poll-create>
 			</div>
+
 		</div>
 	</div>
+</div>
 </div>

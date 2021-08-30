@@ -1,10 +1,9 @@
 <br>
-<app-poll-form [poll]="model"
-	[crudMode]="'create'"
-	(onSave)="doOnSavePoll($event)"
-	(onSaveAndContinue)="doOnSaveAndContinuePoll($event)"
-	(onDelete)="doOnDeletePoll($event)"
-	(onClose)="doOnClose($event)"
+<app-poll-form [model]="model"
+               [crudMode]="'create'"
+               (onSave)="doOnSavePoll($event)"
+               (onSaveAndContinue)="doOnSaveAndContinuePoll($event)"
+               (onClose)="doOnClose($event)"
 >
-	
+
 </app-poll-form>

@@ -1,3 +1,6 @@
-<p>poll-view works!</p>
+<h1>View Poll</h1>
 
-<app-poll-form></app-poll-form>
+<app-poll-form [model]="model"
+               [crudMode]="'consult'"
+               (onClose)="doOnClose($event)">
+</app-poll-form>

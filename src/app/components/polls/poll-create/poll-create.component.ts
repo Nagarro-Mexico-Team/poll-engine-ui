@@ -8,9 +8,8 @@ import {PollsService} from '../../../services/polls.service';
 	styleUrls: ['./poll-create.component.css']
 })
 export class PollCreateComponent implements OnInit {
-	@Input() poll: Poll;
-	@Output() onSave: EventEmitter<any> = new EventEmitter<any>();
 	@Output() onSaveAndContinue: EventEmitter<any> = new EventEmitter<any>();
+	@Output() onSave: EventEmitter<any> = new EventEmitter<any>();
 	@Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
 	@Output() onClose: EventEmitter<any> = new EventEmitter<any>();
 
@@ -24,6 +23,7 @@ export class PollCreateComponent implements OnInit {
 	}
 
 	doOnSavePoll(event) {
+		console.log(event);
 		this.pollsService.savePoll(event)
 			.subscribe(data => {
 				this.onSave.emit(data);
@@ -32,14 +32,20 @@ export class PollCreateComponent implements OnInit {
 	}
 
 	doOnSaveAndContinuePoll(event) {
-		this.onSaveAndContinue.emit(event);
+		console.log(event);
+		this.pollsService.savePoll(event)
+			.subscribe(data => {
+				this.onSaveAndContinue.emit(event);
+			});
 	}
 
 	doOnDeletePoll(event) {
+		console.log(event);
 		this.onDelete.emit(event);
 	}
 
 	doOnClose(event) {
+		console.log(event);
 		this.onClose.emit(true); 
 	}
 

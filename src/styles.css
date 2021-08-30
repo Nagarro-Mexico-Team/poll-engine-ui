@@ -1712,7 +1712,7 @@ pre code {
 
 .table-hover tbody tr:hover {
   color: #212529;
-  background-color: rgba(0, 25, 50, 0.075);
+  background-color: rgba(0, 125, 170, 0.25);
 }
 
 .table-primary,
@@ -1729,7 +1729,7 @@ pre code {
 }
 
 .table-hover .table-primary:hover {
-  background-color: #9fcdff;
+  background-color: silver;
 }
 
 .table-hover .table-primary:hover > td,
@@ -4758,7 +4758,7 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 1px solid rgba(0, 0, 0, 0.425);
   border-radius: 0.25rem;
 }
 

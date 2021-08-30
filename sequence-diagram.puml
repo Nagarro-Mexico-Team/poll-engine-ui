@@ -1,0 +1,26 @@
+@startuml
+App -> Header : create()
+Header --> App : (onLogout) [isLoggedIn=true]
+Header --> App : (onMenuSelect) [selectedMenu='...']
+App -> Content : [isLoggedIn]
+App -> Content : [selectedMenu]
+Content -> Login : [isLoggedIn=false]
+Login --> Content : (onLoginSuccess) [isLoggedIn=true]
+Content -> Dashboard : [selectedMenu='dashboard']
+Content -> PollsList : [selectedMenu='polls'|
+PollsList -> PollCreate : [poll] ; empty
+PollCreate -> PollForm : [poll] ; << model >>
+PollForm -> GridQuestionOptions : Array<Question>
+GridQuestionOptions -> BasicGrid : Array<any>
+PollForm -> QuestionForm
+PollForm --> PollCreate : (onSave) [poll]
+PollCreate -> PollService : savePoll(data) [poll]
+PollService --> PollCreate : subscribe(data) [pollId]
+PollCreate --> PollsList : (onSave) [poll]
+PollsList -> PollUpdate : [poll] ; full
+PollUpdate -> PollForm
+PollUpdate -> PollService
+PollsList -> PollView : [poll]
+PollView -> PollForm : [poll]
+App -> Footer
+@enduml

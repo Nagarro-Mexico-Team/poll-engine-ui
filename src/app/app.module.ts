@@ -24,6 +24,7 @@ import {GridQuestionOptionsComponent} from './components/polls/grid-question-opt
 import {QuestionFormComponent} from './components/polls/poll-form/question-form/question-form.component';
 import {NgbAlertModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import {PollsService} from './services/polls.service';
+import {ClientsService} from './services/clients.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import {PollsService} from './services/polls.service';
   exports: [
     MatToolbarModule
   ],
-  providers: [PollsService],
+  providers: [PollsService, ClientsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

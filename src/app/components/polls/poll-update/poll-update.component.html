@@ -1,3 +1,7 @@
-<p>poll-update works!</p>
+<h1>Edit Poll</h1>
+<app-poll-form [model]="model"
+               [crudMode]="'update'"
+               (onSave)="doOnSavePoll($event)"
+               (onClose)="doOnClose($event)">
 
-<app-poll-form></app-poll-form>
+</app-poll-form>

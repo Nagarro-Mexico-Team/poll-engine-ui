@@ -6,42 +6,46 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="isLoggedIn">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="#" (click)="doOnMenuSelect('dashboard')" >Home <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Polls
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
 							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('polls')" >List polls</a>
 							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('create-poll')">Create poll</a>
 							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('resolve-poll')">Resolve poll</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('evaluate-poll')">Poll results</a>
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Clients
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('polls')" >Clients List polls</a>
-							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('create-poll')">Create poll</a>
-							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('resolve-poll')">Resolve poll</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('evaluate-poll')">Poll results</a>
-						</div>
 						</div>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link dropdown-toggle" href="#">Access control</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Clients
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('clients')" >Clients list </a>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('add-client')">Add client</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('client-polls')">Client polls</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Access control</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown3">
 							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('users')">Users</a>
 							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('roles')">Roles</a>
 							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('permissions')">Permissions</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#" (click)="doOnMenuSelect('log-audit')">Log Audit</a>
 						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" (click)="doOnLogout()" >Logout <span class="sr-only">(current)</span></a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">

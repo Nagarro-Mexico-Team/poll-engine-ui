@@ -15,7 +15,7 @@ export class AppComponent {
   	this.isLoggedIn = true;
   }
 
-  doLogout(event): void {
+  doOnLogout(event): void {
   	console.log(event);
   	this.isLoggedIn = false;
   }

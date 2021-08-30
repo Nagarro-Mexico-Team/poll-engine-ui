@@ -1,154 +1,178 @@
 <div class="container">
-	<div class="row">
-		<div class="col-12">
-			<fieldset>
-				<div class="card">
-					<div class="card-content">
-						<div class="card-header">
-							<h3>Create new poll</h3>
-						</div>
-						<div class="card-body">
-							<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.valid == false">
-								<span>There are some errors you need to resolve.</span>
-							</div> 
-							<div class="alert alert-success" role="alert" *ngIf="submitted && pollForm.valid == true">
-								<span>Poll was successfully created!</span>
-							</div> 
-							<form [formGroup]="pollForm">
-								<div class="row">
-									<div class="col-12">
-										<div class="row">
-											<div class="col-12">
-												<div class="form-group">
-													<label class="control-label">Poll Id</label><br>
-													<input type="text" formControlName="pollId" class="my-form-control-id" [readonly]="true" [disabled]="true">
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-8">
-												<div class="form-group">
-													<label class="control-label">Title</label>
-													<input type="text" formControlName="title" class="form-control" >
-													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['title'].valid == false">
-														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
-															<li *ngIf="pollForm.controls['title'].errors.required">
-																Title is required!
-															</li>
-														</ul>
-													</div> 
-												</div>
-											</div>
-											<div class="col-4">
-												<div class="form-group date">
-													<label class="control-label">Creation Date</label>
-													<input class="form-control" placeholder="yyyy-mm-dd"
-													name="dpCreationDt" formControlName="creationDate" ngbDatepicker #d="ngbDatepicker"
-													[placement]="placement" [positionTarget]="buttonEl" style="width: 80%; float: left;">
-													<div class="input-group-append" style="float: none;" >
-														<button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">...<i class="k-calendar-icon"></i></button>
-													</div>
-													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['creationDate'].valid == false">
-														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
-															<li *ngIf="pollForm.controls['creationDate'].errors.required">
-																Creation Date is required!
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-6">
-												<div class="form-group">
-													<label class="control-label">Client</label>
-													<input type="text" formControlName="clientName" class="form-control" 
-													[ngbTypeahead]="search"
-													[inputFormatter]="formatter"
-													[resultFormatter]="formatter"
-													[editable]='false'>
+  <div class="row">
+    <div class="col-12">
+      <fieldset>
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <h3 *ngIf="crudMode=='create'">Create new poll</h3>
+              <h3 *ngIf="crudMode=='update'">Edit poll</h3>
+              <h3 *ngIf="crudMode=='consult'">View poll</h3>
+              <h3 *ngIf="crudMode=='delete'">Delete poll</h3>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.valid == false">
+                <span>There are some errors you need to resolve.</span>
+              </div>
+              <div class="alert alert-success" role="alert" *ngIf="submitted && pollForm.valid == true">
+                <span>Poll was successfully created!</span>
+              </div>
+              <form [formGroup]="pollForm">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label class="control-label">Poll Id</label><br>
+                          <input type="text" formControlName="pollId" class="my-form-control-id" [readonly]="true">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-8">
+                        <div class="form-group">
+                          <label class="control-label">Title</label>
+                          <input type="text" formControlName="title" class="form-control" [readonly]="crudMode=='consult'">
+                          <div class="alert alert-danger" role="alert"
+                               *ngIf="submitted && pollForm.controls['title'].valid == false">
+                            <ul class="row"
+                                style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+                              <li *ngIf="pollForm.controls['title'].errors.required">
+                                Title is required!
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group date">
+                          <label class="control-label">Creation Date</label>
+                          <input class="form-control" placeholder="yyyy-mm-dd"
+                                 name="dpCreationDt" formControlName="creationDate" ngbDatepicker #d="ngbDatepicker"
+                                 [placement]="placement" positionTarget="buttonEl" style="width: 80%; float: left;">
+                          <div class="input-group-append" style="float: none;" *ngIf="crudMode!='consult'">
+                            <button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                    type="button">...<i class="k-calendar-icon"></i></button>
+                          </div>
+                          <div class="alert alert-danger" role="alert"
+                               *ngIf="submitted && pollForm.controls['creationDate'].valid == false">
+                            <ul class="row"
+                                style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+                              <li *ngIf="pollForm.controls['creationDate'].errors.required">
+                                Creation Date is required!
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label class="control-label">Client</label>
+                          <input type="text" formControlName="clientName" class="form-control"
+                                 [ngbTypeahead]="search"
+                                 [inputFormatter]="formatter"
+                                 [resultFormatter]="formatter"
+                                 [editable]='false'>
 
-													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['clientName'].valid == false">
-														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
-															<li *ngIf="pollForm.controls['clientName'].errors.required">
-																Client's name is required!
-															</li>
-														</ul>
-													</div> 
-												</div>
-											</div>
-											<div class="col-3">
-												<div class="form-group">
-													<label class="control-label">Due Date</label>
-													<input class="form-control" placeholder="yyyy-mm-dd"
-													name="dpDueDt" formControlName="dueDate" ngbDatepicker #d1="ngbDatepicker"
-													[placement]="placement" [positionTarget]="buttonEl1" style="width: 80%; float: left;">
-													<div class="input-group-append" style="float: none;" >
-														<button #buttonEl1 class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">...<i class="k-calendar-icon"></i></button>
-													</div>
-													<div class="alert alert-danger" role="alert" *ngIf="submitted && pollForm.controls['dueDate'].valid == false">
-														<ul class="row" style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
-															<li *ngIf="pollForm.controls['dueDate'].errors.required">
-																Due Date is required!
-															</li>
-														</ul>
-													</div> 
-												</div>
-											</div>
-											<div class="col-3">
-												<div class="form-group">
-													<label class="control-label">Status</label>
-													<select class="form-control">
-														<option value="1">Created</option>
-														<option value="2">Scheduled</option>
-														<option value="3">Presented</option>
-														<option value="4">Evaluated</option>
-														<option value="5">Completed</option>
-													</select>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-12">
-												<div class="form-group">
-													<label class="control-label">Questions</label>
-													<app-grid-question-options
-													[gridData]="gridData"
-													[showActionsColumn]="false"
-													[showSelectColumn]="true"
-													[selectedIndex]="selectedIndex"
-													(onSelectionChange)="doOnSelectionChange($event)"
-													[idFieldName]="'questionId'">
-												</app-grid-question-options>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-12">
-												<div class="form-group">
-													<button type="button" id="addQuestionBtn" class="btn btn-primary mr-2" (click)="addNewQuestionClick(questionForm)" >Add Question</button>
-													<button class="btn btn-secondary mr-2" (click)="editQuestionClick(questionForm)" >Edit Question</button>
-													<button class="btn btn-danger mr-2">Delete Question</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer col-12 text-right">
-									<label class="control-label mr-2" for="saveAndContinueChx">Save and continue</label>
-									<input id="saveAndContinueChx" value="true" [checked]="chkSaveAndContinue" (change)="doSaveAndContinueCheckOnChange($event)"
-									type="checkbox" class="checkbox">
-									<button class="btn btn-primary ml-2 mr-2" (click)="doOnClickSavePoll($event)" >Save Poll</button>
-									<button class="btn btn-danger mr-2"  >Delete Poll</button>
-									<button class="btn btn-secondary mr-2" (click)="doOnCancel($event)" >Cancel</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-
-		</fieldset>
-	</div>
+                          <div class="alert alert-danger" role="alert"
+                               *ngIf="submitted && pollForm.controls['clientName'].valid == false">
+                            <ul class="row"
+                                style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+                              <li *ngIf="pollForm.controls['clientName'].errors.required">
+                                Client's name is required!
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label class="control-label">Due Date</label>
+                          <input class="form-control" placeholder="yyyy-mm-dd"
+                                 name="dpDueDt" formControlName="dueDate" ngbDatepicker #d1="ngbDatepicker"
+                                 [placement]="placement" positionTarget="buttonEl1" style="width: 80%; float: left;">
+                          <div class="input-group-append" style="float: none;" *ngIf="crudMode!='consult'" >
+                            <button #buttonEl1 class="btn btn-outline-secondary calendar" (click)="d1.toggle()"
+                                    type="button">...<i class="k-calendar-icon"></i></button>
+                          </div>
+                          <div class="alert alert-danger" role="alert"
+                               *ngIf="submitted && pollForm.controls['dueDate'].valid == false">
+                            <ul class="row"
+                                style="padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">
+                              <li *ngIf="pollForm.controls['dueDate'].errors.required">
+                                Due Date is required!
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label class="control-label">Status</label>
+                          <select class="form-control" [disabled]="crudMode=='consult'">
+                            <option value="1">Created</option>
+                            <option value="2">Scheduled</option>
+                            <option value="3">Presented</option>
+                            <option value="4">Evaluated</option>
+                            <option value="5">Completed</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label class="control-label">Questions</label>
+                          <app-grid-question-options
+                            [gridData]="gridData"
+                            [showActionsColumn]="false"
+                            [showSelectColumn]="true"
+                            [selectedIndex]="selectedIndex"
+                            (onSelectionChange)="doOnSelectionChange($event)"
+                            [idFieldName]="'questionId'">
+                          </app-grid-question-options>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12" *ngIf="crudMode!='consult'">
+                        <div class="form-group">
+                          <button type="button" id="addQuestionBtn" class="btn btn-primary mr-2"
+                                  (click)="addNewQuestionClick(questionForm)">Add Question
+                          </button>
+                          <button class="btn btn-secondary mr-2" (click)="editQuestionClick(questionForm)"
+                                  [disabled]="model.questions.length == 0">Edit Question
+                          </button>
+                          <button class="btn btn-danger mr-2">Delete Question</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="card-footer col-12 text-right">
+                    <label class="control-label mr-2" for="saveAndContinueChx1"
+                           *ngIf="crudMode=='create' || crudMode=='update'">Save and continue</label>
+                    <input id="saveAndContinueChx1" value="true" *ngIf="crudMode=='create' || crudMode=='update'"
+                           [checked]="chkSaveAndContinue"
+                           (change)="doSaveAndContinueCheckOnChange($event)"
+                           type="checkbox" class="checkbox">
+                    <button class="btn btn-primary ml-2 mr-2" *ngIf="crudMode=='create' || crudMode=='update'"
+                            (click)="doOnClickSavePoll($event)">Save Poll
+                    </button>
+                    <button class="btn btn-danger mr-2" *ngIf="crudMode=='delete'">Delete Poll</button>
+                    <button class="btn btn-secondary mr-2" (click)="doOnCancel($event)">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
 </div>
 
 <br>
@@ -157,12 +181,12 @@
 
 <ng-template #questionForm let-modal>
 
-	<app-question-form 
-	[modal]="modal"
-	[data]="selectedItem" 
-	[crudMode]="crudMode"
-	(onSave)="doOnSaveQuestion($event)">
-
-</app-question-form>
+  <app-question-form
+    [modal]="modal"
+    [data]="selectedItem"
+    [crudMode]="questionCrudMode"
+    (onSave)="doOnSaveQuestion($event)"
+    (onClose)="doOnCloseQuestionForm($event)"
+    ></app-question-form>
 
 </ng-template>

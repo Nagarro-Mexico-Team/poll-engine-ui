@@ -16,8 +16,6 @@ export class Poll {
 		this.clientName = "";
 		this.dueDate = "";
 		this.status = 0;
-		this.questions = [
-			new Question()
-		];
+		this.questions = [];
 	}
 }

@@ -26,10 +26,11 @@ export class PollsService {
   }
 
   savePoll(poll: Poll): Observable<Poll> {
-    return this.http.post<Poll>(this.url + "create", poll, httpOptions)
-      .pipe(
-        catchError(this.handleError('createPoll', poll))
-      );
+    return this.http.post<Poll>(this.url + "create", poll, httpOptions);
+  }
+
+  updatePoll(poll: Poll): Observable<Poll> {
+    return this.http.put<Poll>(this.url + "update/", poll, httpOptions);
   }
 
   handleError(title, obj): any {

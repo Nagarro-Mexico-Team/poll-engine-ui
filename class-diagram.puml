@@ -1,0 +1,37 @@
+@startuml
+class AppComponent { }
+class ContentComponent { }
+class GridQuestionOptionsComponent { }
+class HeaderComponent { } 
+class LoginComponent { } 
+class LoginService { }
+class PollCreateComponent { }
+class PollFormComponent { } 
+class PollService<<RestController>> { 
+   +httpClient: HttpClient
+   +savePoll(poll:Poll) : Poll
+   +getPolls() : List<Poll>
+   +getPoll(pollId: Integer) : Poll
+   +deletePoll(pollId: Integer)
+} 
+class PollsListComponent { }
+class PollUpdateComponent { }
+class PollViewComponent { }
+class FooterComponent { }
+class BasicGridComponent { }
+
+AppComponent -down-> HeaderComponent
+AppComponent -down-> ContentComponent
+AppComponent -down-> FooterComponent
+ContentComponent o-down-> LoginComponent
+LoginComponent -down-> LoginService : calls
+ContentComponent o-down-> PollsListComponent
+ContentComponent o-down-> PollCreateComponent
+PollsListComponent *-down-> PollCreateComponent
+PollCreateComponent -down-> PollService : cals
+PollCreateComponent *-down-> PollFormComponent
+PollFormComponent *-down-> GridQuestionOptionsComponent
+GridQuestionOptionsComponent *-down-> BasicGridComponent
+PollsListComponent *-down-> PollUpdateComponent
+PollsListComponent *-down-> PollViewComponent
+@enduml
