@@ -74,7 +74,9 @@
                                  [ngbTypeahead]="search"
                                  [inputFormatter]="formatter"
                                  [resultFormatter]="formatter"
-                                 [editable]='false'>
+                                 [editable]='false'
+                                 (input)="refreshData()"
+                                 >
 
                           <div class="alert alert-danger" role="alert"
                                *ngIf="submitted && pollForm.controls['clientName'].valid == false">

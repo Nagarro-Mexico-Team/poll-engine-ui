@@ -36,7 +36,6 @@ export class PollFormComponent implements OnInit {
   submitted: boolean;
   chkSaveAndContinue: boolean;
   clients: Client[] = [];
-  formatter = (client: Client) => client.clientName;
 
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private clientsService: ClientsService) {
     this.gridData = {rows: [], fieldNames: []};
@@ -48,6 +47,14 @@ export class PollFormComponent implements OnInit {
     this.prepareGridData();
     this.selectedItem = {};
     this.selectedIndex = 0;
+    this.clientsService.getClients()
+      .subscribe(data => {
+        this.clients = data;
+      });
+  }
+
+  refreshData() {
+    console.log("refreshing data");
     this.clientsService.getClients()
       .subscribe(data => {
         this.clients = data;
@@ -162,6 +169,7 @@ export class PollFormComponent implements OnInit {
     filter(term => term.length >= 2),
     map(term => this.clients.filter(client => new RegExp(term, 'mi').test(client.clientName)).slice(0, 10))
   )
+  formatter = (client: Client) => client.clientName;
 
   doOnCloseQuestionForm(event) {
     this.modal.close();
